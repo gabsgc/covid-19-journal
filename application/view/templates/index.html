@@ -19,16 +19,20 @@
             </div>
         </div>
         <div class="row pb-5 pt-5">
-            <h2>TOP Notícias</h2>
+            <h2>TOP 3 Notícias</h2>
+            <p class="text-center text-black-50">Confira as noticias mais curtidas da semana</p>
+            {% for noticia in noticia_list: %}
             <div class="col-lg-4">
-                Lorem ipsum dolor sit
+                <a href="/noticia/{{noticia.getId()}}" class="mt-4 d-flex justify-content-center">
+                    <img src="{{url_for('static', filename=noticia.getImagePath())}}" class="img-fluid" width="300px"
+                        alt="{{noticia.getTitle()}}">
+                </a>
+                <div class="text-center">
+                    <span class="badge bg-info">{{noticia.getLikes()}} Likes</span>
+                    <span class="badge bg-success">{{noticia.getViews()}} Visualizações</span>
+                </div>
             </div>
-            <div class="col-lg-4">
-                Quisque nec congue orci
-            </div>
-            <div class="col-lg-4">
-                Aliquam in venenatis lectus
-            </div>
+            {% endfor %}
         </div>
         <div class="row pb-5">
             <h2>Notícias por estado</h2>
@@ -53,15 +57,14 @@
             <div class="row">
                 <div class="col pb-4">
                     <div class="collapse multi-collapse" id="multiCollapseExample{{estado.getId()}}">
-                        <div class="row pb-3 pt-2">
+                        <div class="row pb-3">
                             {% for noticia in estado.getNoticiaList(): %}
-                            <div class="card border-info" style="width: 18rem; margin-left: 2rem;">
+                            <div class="card border-0" style="width: 18rem; margin-left: 2rem;">
                                 <img src="{{url_for('static', filename=noticia.getImagePath())}}" class="card-img-top"
-                                    alt="...">
+                                    alt="{{noticia.getTitle()}}">
                                 <div class="card-body">
                                     <h5 class="card-title">{{noticia.getTitle()}}</h5>
                                     <span class="badge bg-info">{{noticia.getLikes()}} Likes</span>
-
                                     <span class="badge bg-success">{{noticia.getViews()}} Visualizações</span>
 
                                     <a href="/noticia/{{noticia.getId()}}" class="btn btn-primary mt-4">
