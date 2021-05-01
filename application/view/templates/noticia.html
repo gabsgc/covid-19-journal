@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} <title>Notícia 1 | Covid-19 Journal</title>{% endblock %}
+{% block styles %} {% endblock %}
+
+{% block content %}
+<div>
+    <div class="container">
+        {% if noticia: %}
+        <div class="row text-center">
+            <h1>{{noticia.getTitle()}}</h1>
+        </div>
+        <div class="row mb-4 mt-4">
+            <video src="{{url_for('static', filename=noticia.getVideoPath())}}" type="video/mp4" width="320"
+                height="440" controls>
+
+                Seu navegador não suporta a exibição desse vídeo.
+            </video>
+        </div>
+        <div class="row text-black-50">
+            <span>Publicado em {{noticia.getPublishedAt()}}</span>
+        </div>
+        <div class="row pb-5">
+            <div>
+                <span class="badge bg-primary">{{noticia.getLikes()}} Likes</span>
+                <span class="badge bg-success">{{noticia.getViews()}} Visualizações</span>
+                <p class="pt-3 text-justify">
+                    {{noticia.getText()}}
+                </p>
+            </div>
+            <div>
+
+            </div>
+        </div>
+        {% else: %}
+        <h1>Ops! Notícia não encontrada. </h1>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+{% block scripts %} {% endblock %}

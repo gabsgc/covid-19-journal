@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Covid-19 Journal | Sua fonte de notícias sobre a Covid-19</title>{% endblock %}
+{% block styles %} {% endblock %}
+
+{% block content %}
+<div>
+    <div class="container home">
+        <div class="row text-center" style="align-items: center;">
+            <div class="col-lg-5 d-block align-self-center">
+                <h1>
+                    <span class="text-primary">COVID-19 </span>
+                    <span class="text-success">Journal</span>
+                </h1>
+                <h4>Sua fonte de notícias sobre a Covid-19</h4>
+            </div>
+            <div class="col-lg-7">
+                <img src="../static/img/capa-home.png" class="img-fluid" alt="Distância Social">
+            </div>
+        </div>
+        <div class="row pb-5 pt-5">
+            <h2>TOP Notícias</h2>
+            <div class="col-lg-4">
+                Lorem ipsum dolor sit
+            </div>
+            <div class="col-lg-4">
+                Quisque nec congue orci
+            </div>
+            <div class="col-lg-4">
+                Aliquam in venenatis lectus
+            </div>
+        </div>
+        <div class="row pb-5">
+            <h2>Notícias por estado</h2>
+            <p class="pt-2 text-center">Escolha um estado e acompanhe as últimas notícias</p>
+            {% for estado in estado_list: %}
+            <div class="row pb-5">
+                <div class="col-lg-2">
+                    <img src="{{url_for('static', filename=estado.getBandeira())}}" width=150px class="img-fluid p-2"
+                        alt="{{estado.getNome()}}">
+                </div>
+                <div class="col-lg-3">
+                    <h5>{{estado.getNome()}} - {{estado.getSigla()}}</h5>
+                    <p>
+                        <a class="btn btn-primary" data-bs-toggle="collapse"
+                            href="#multiCollapseExample{{estado.getId()}}" role="button" aria-expanded="false"
+                            aria-controls="multiCollapseExample{{estado.getId()}}">
+                            Visualizar notícias
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col pb-4">
+                    <div class="collapse multi-collapse" id="multiCollapseExample{{estado.getId()}}">
+                        <div class="row pb-3 pt-2">
+                            {% for noticia in estado.getNoticiaList(): %}
+                            <div class="card border-info" style="width: 18rem; margin-left: 2rem;">
+                                <img src="{{url_for('static', filename=noticia.getImagePath())}}" class="card-img-top"
+                                    alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{noticia.getTitle()}}</h5>
+                                    <span class="badge bg-info">{{noticia.getLikes()}} Likes</span>
+
+                                    <span class="badge bg-success">{{noticia.getViews()}} Visualizações</span>
+
+                                    <a href="/noticia/{{noticia.getId()}}" class="btn btn-primary mt-4">
+                                        Saiba mais</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %} {% endblock %}
