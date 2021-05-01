@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    text-align: center;
+    font-family: 'Roboto';
+}
+
+p {
+    font-family: 'Montserrat';
+}
+
+#rodape {
+    background-color: black;
+    height: 200px;
+}
+
+#rodape p {
+    color: #ffff;
+}
